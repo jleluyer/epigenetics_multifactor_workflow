@@ -13,7 +13,7 @@ base=__BASE__
 awk '{print $1,$2,$6}' "$DATA_FOLDER"/"$base"_CpG.meth >"$DATA_FOLDER"/"$base".dss.1.temp
 awk '{printf "%.0f\n",$5*$6}' "$DATA_FOLDER"/"$base"_CpG.meth >"$DATA_FOLDER"/"$base".dss.2.temp
 paste "$DATA_FOLDER"/"$base".dss.1.temp "$DATA_FOLDER"/"$base".dss.2.temp >"$DATA_FOLDER"/"$base".temp.dss
-cat 01_info_file/header.dss "$DATA_FOLDER"/"$base".temp.dss >"$DATA_FOLDER"/"$base".dss
+cat 01_info_file/header.dss "$DATA_FOLDER"/"$base".temp.dss|sed -i 's/\t/ /g' >"$DATA_FOLDER"/"$base".dss
 
 # clean up
 rm "$DATA_FOLDER"/"$base"*.temp
