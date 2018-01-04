@@ -57,4 +57,4 @@ hist(DMLtest.interaction$pvals, 50, main="P values", xlab="")
 
 #DMR for multiple factor
 DMRtest<-callDMR(DMLtest.interaction, p.threshold=0.01)
-colnames(DMLfit$X)
+write.table(DMRtest,file="dss.interaction.dmr.txt",quote=F)
