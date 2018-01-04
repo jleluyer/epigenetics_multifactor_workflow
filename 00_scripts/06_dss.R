@@ -29,7 +29,7 @@ trans2.t<-read.table("trans2.t.dss",header=T)
 
 #Make object DSS
 BSobj <- makeBSseqData( list(ntrans.1.s, ntrans.2.s,ntrans.1.t,ntrans.2.t,trans1.s,trans2.s,trans1.t,trans2.t),c("NTS1","NTS2", "NTT1", "NTT2","TS1","TS2","TT1","TT2"))
-save(BSobj,file="bsobj.dss.rda")
+save(BSobj,file="06_statistics/bsobj.dss.rda")
 message("object done")
 
 #Make design
@@ -40,21 +40,21 @@ design
 
 # Build model
 DMLfit = DMLfit.multiFactor(BSobj, design=design, formula=~Strain+Env+Strain:Env)
-save(DMLfit,file="dmlfit.dss.rda")
+save(DMLfit,file="06_statistics/dmlfit.dss.rda")
 
 # Testing
 DMLtest.interaction = DMLtest.multiFactor(DMLfit, coef=4)
-write.table(DMLtest.interaction,file="dss.interaction.testing.txt",quote=F)
+write.table(DMLtest.interaction,file="06_statistics/dss.interaction.testing.txt",quote=F)
 
 # Sort output
 ix=sort(DMLtest.interaction[,"pvals"], index.return=TRUE)$ix
 head(DMLtest.interaction[ix,])
 
 # stats distribution
-par(mfrow=c(1,2))
-hist(DMLtest.interaction$stat, 50, main="test statistics", xlab="")
-hist(DMLtest.interaction$pvals, 50, main="P values", xlab="")
+pdf("06_statistics/dss.stat.pdf",width=12,height=12);hist(DMLtest.interaction$stat, 50, main="test statistics", xlab=""); dev.off()
+pdf("06_statistics/dss.pvals.pdf",width=12,height=12);hist(DMLtest.interaction$pvals, 50, main="P values", xlab=""); dev.off()
+
 
 #DMR for multiple factor
 DMRtest<-callDMR(DMLtest.interaction, p.threshold=0.01)
-write.table(DMRtest,file="dss.interaction.dmr.txt",quote=F)
+write.table(DMRtest,file="06_statistics/dss.interaction.dmr.txt",quote=F)
