@@ -21,8 +21,9 @@ makedb -c <genome folder or file> -o <index file>
 '
 
 #variables
-GENOME="04_refernce/genome.fa"
-INDEX="index_genome.dbindex"
+GENOME="04_reference/genome.fa"           #use genome_filtered.fa if removing C-T SNPs from the reference genome 
+                                          #("00_scripts/utility_scripts/05_prepare_reference_filter.sh
+INDEX="04_reference/index_genome.dbindex"
 
 #prepare genome
 makedb -c $GENOME -o $INDEX
