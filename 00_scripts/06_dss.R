@@ -60,7 +60,7 @@ save(DMLtest.env,file="06_statistics/dmltest.env.dss.rda")
 
 #DMR for multiple factor
 DMRtest<-callDMR(DMLtest.env, p.threshold=0.01, minlen=500, minCG=3, dis.merge=1000, pct.sig=0.5)
-write.table(DMRtest,file="06_statistics/dss.interaction.dmr.txt",quote=F)
+write.table(DMRtest,file="06_statistics/dss.env.dmr.txt",quote=F)
 
 ### Interaction
 # Testing
