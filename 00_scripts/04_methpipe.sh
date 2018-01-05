@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #PBS -N methpipe.__BASE__
-#PBS -o log-methpipe.__BASE__.out
+#PBS -o 98_log_files/log-methpipe.__BASE__.out
 #PBS -l walltime=20:00:00
 #PBS -l mem=50g
 #PBS -r n

@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N walt.__BASE__
-#PBS -o log-align.__BASE__.out
+#PBS -o 98_log_files/log-align.__BASE__.out
 #PBS -l walltime=20:00:00
 #PBS -l mem=30g
 #PBS -l ncpus=5

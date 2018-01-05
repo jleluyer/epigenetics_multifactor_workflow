@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N index.trim
-#PBS -o log-index.trim.out
+#PBS -o 98_log_files/log-index.trim.out
 #PBS -l walltime=20:00:00
 #PBS -l mem=50g
 #PBS -r n
@@ -14,7 +14,7 @@ SCRIPT=$0
 NAME=$(basename $0)
 LOG_FOLDER="98_log_files"
 
-cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
+cp $SCRIPT "$LOG_FOLDER"/"$TIMESTAMP"_"$NAME"
 
 : 'usage
 makedb -c <genome folder or file> -o <index file>

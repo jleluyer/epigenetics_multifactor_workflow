@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #PBS -N prep_dss.__BASE__
-#PBS -o log-prep_dss.__BASE__.out
+#PBS -o 98_log_files/log-prep_dss.__BASE__.out
 #PBS -l walltime=20:00:00
 #PBS -l mem=5g
 #PBS -r n

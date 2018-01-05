@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N dss
-#PBS -o log-dss.out
+#PBS -o 98_log_files/log-dss.out
 #PBS -l walltime=20:00:00
 #PBS -l mem=50g
 #PBS -r n

@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N trimming.__BASE__
-#PBS -o log-trimming.__BASE__.out
+#PBS -o 98_log_files/log-trimming.__BASE__.out
 #PBS -l walltime=20:00:00
 #PBS -l mem=50g
 #PBS -r n
