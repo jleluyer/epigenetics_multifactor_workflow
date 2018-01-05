@@ -14,7 +14,8 @@ cd $PBS_O_WORKDIR
 #global variables
 INDEX="04_reference/index_genome.trim.dbindex"
 DATAFOLDER="03_trimmed"
+DATAOUTPUT="05_results"
 base=__BASE__
 
-walt -i $INDEX -m 6 -t 5 -N 5000000 -1 "$DATAFOLDER"/"$base"_R1.fq -2 "$DATAFOLDER"/"$base"_R2.fq -o "$base".mr
+walt -i $INDEX -m 6 -t 5 -N 5000000 -1 "$DATAFOLDER"/"$base"_R1.fq -2 "$DATAFOLDER"/"$base"_R2.fq -o "$DATAOUTPUT"/"$base".mr
 
