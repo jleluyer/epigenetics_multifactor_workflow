@@ -18,6 +18,6 @@ paste "$DATA_FOLDER"/"$base".dss.1.temp "$DATA_FOLDER"/"$base".dss.2.temp >"$DAT
 cat 01_info_files/header.dss "$DATA_FOLDER"/"$base".temp.dss|sed 's/\t/ /g' >"$DATA_FOLDER"/"$base".dss
 
 # clean up
-rm "$DATA_FOLDER"/"$base"*.temp
-rm "$DATA_FOLDER"/"$base"*temp.dss
+rm "$DATA_FOLDER"/"$base".*.temp
+rm "$DATA_FOLDER"/"$base".*temp.dss
 
