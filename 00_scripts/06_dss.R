@@ -42,19 +42,32 @@ design
 DMLfit = DMLfit.multiFactor(BSobj, design=design, formula=~Strain+Env+Strain:Env)
 save(DMLfit,file="06_statistics/dmlfit.dss.rda")
 
+### Strain
+# Testing
+DMLtest.strain = DMLtest.multiFactor(DMLfit, coef=2)
+write.table(DMLtest.strain,file="06_statistics/dss.strain.testing.txt",quote=F)
+save(DMLtest.strain,file="06_statistics/dmltest.strain.dss.rda")
+
+#DMR for multiple factor
+DMRtest<-callDMR(DMLtest.strain, p.threshold=0.01, minlen=500, minCG=3, dis.merge=1000, pct.sig=0.5)
+write.table(DMRtest,file="06_statistics/dss.strain.dmr.txt",quote=F)
+
+### Environment
+# Testing
+DMLtest.env = DMLtest.multiFactor(DMLfit, coef=3)
+write.table(DMLtest.env,file="06_statistics/dss.env.testing.txt",quote=F)
+save(DMLtest.env,file="06_statistics/dmltest.env.dss.rda")
+
+#DMR for multiple factor
+DMRtest<-callDMR(DMLtest.env, p.threshold=0.01, minlen=500, minCG=3, dis.merge=1000, pct.sig=0.5)
+write.table(DMRtest,file="06_statistics/dss.interaction.dmr.txt",quote=F)
+
+### Interaction
 # Testing
 DMLtest.interaction = DMLtest.multiFactor(DMLfit, coef=4)
 write.table(DMLtest.interaction,file="06_statistics/dss.interaction.testing.txt",quote=F)
-
-# Sort output
-ix=sort(DMLtest.interaction[,"pvals"], index.return=TRUE)$ix
-head(DMLtest.interaction[ix,])
-
-# stats distribution
-pdf("06_statistics/dss.stat.pdf",width=12,height=12);hist(DMLtest.interaction$stat, 50, main="test statistics", xlab=""); dev.off()
-pdf("06_statistics/dss.pvals.pdf",width=12,height=12);hist(DMLtest.interaction$pvals, 50, main="P values", xlab=""); dev.off()
-
+save(DMLtest.interaction,file="06_statistics/dmltest.interaction.dss.rda")
 
 #DMR for multiple factor
-DMRtest<-callDMR(DMLtest.interaction, p.threshold=0.01)
+DMRtest<-callDMR(DMLtest.interaction, p.threshold=0.01, minlen=500, minCG=3, dis.merge=1000, pct.sig=0.5)
 write.table(DMRtest,file="06_statistics/dss.interaction.dmr.txt",quote=F)
