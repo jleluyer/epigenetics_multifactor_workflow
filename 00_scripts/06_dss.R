@@ -15,17 +15,17 @@ ls()
 library(DSS)
 
 #set working directory
-setwd("/home1/datawork/jleluyer/01_projects/test_walt/")
+setwd("/home1/datawork/jleluyer/01_projects/epigenetics_multifactor_workflow/")
 
 #Prepare dataset
-ntrans.1.s<-read.table("ntrans.1.s.dss",header=T)
-ntrans.1.t<-read.table("ntrans.1.t.dss",header=T)
-ntrans.2.s<-read.table("ntrans.2.s.dss",header=T)
-ntrans.2.t<-read.table("ntrans.2.t.dss",header=T)
-trans1.s<-read.table("trans1.s.dss",header=T)
-trans1.t<-read.table("trans1.t.dss",header=T)
-trans2.s<-read.table("trans2.s.dss",header=T)
-trans2.t<-read.table("trans2.t.dss",header=T)
+ntrans.1.s<-read.table("05_results/ntrans.1.s.dss",header=T)
+ntrans.1.t<-read.table("05_results/ntrans.1.t.dss",header=T)
+ntrans.2.s<-read.table("05_results/ntrans.2.s.dss",header=T)
+ntrans.2.t<-read.table("05_results/ntrans.2.t.dss",header=T)
+trans1.s<-read.table("05_results/trans1.s.dss",header=T)
+trans1.t<-read.table("05_results/trans1.t.dss",header=T)
+trans2.s<-read.table("05_results/trans2.s.dss",header=T)
+trans2.t<-read.table("05_results/trans2.t.dss",header=T)
 
 #Make object DSS
 BSobj <- makeBSseqData( list(ntrans.1.s, ntrans.2.s,ntrans.1.t,ntrans.2.t,trans1.s,trans2.s,trans1.t,trans2.t),c("NTS1","NTS2", "NTT1", "NTT2","TS1","TS2","TT1","TT2"))
