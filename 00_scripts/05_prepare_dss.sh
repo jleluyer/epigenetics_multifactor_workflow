@@ -5,6 +5,8 @@
 #PBS -l mem=5g
 #PBS -r n
 
+cd $PBS_O_WORKDIR
+
 # Global variables
 DATA_FOLDER="05_results"
 base=__BASE__

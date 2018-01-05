@@ -5,7 +5,7 @@
 rm PREPDSS*sh
 
 # Prepare jobs
-for i in $(ls 05_results*_CpG.meth|sed 's/_CpG.meth//g')
+for file in $(ls 05_results/*_CpG.meth|sed 's/_CpG.meth//g')
 
 do
 base="$(basename $file)"
