@@ -6,8 +6,8 @@
 #PBS -r n
 
 #Export libs
-export CPATH=/home1/datahome/jleluyer/include/
-export LIBRARY_PATH=/home1/datahome/jleluyer/lib
+source /usr/share/Modules/3.2.10/init/bash
+module load gsl
 
 cd $PBS_O_WORKDIR
 

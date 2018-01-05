@@ -5,7 +5,7 @@
 rm ALIGN*sh
 
 # Prepare jobs
-for file in $(ls 03_trimmed|sed 's/.fastq.gz//g')
+for file in $(ls 03_trimmed/*fq|sed -e 's/_R[12].fq//g'|sort -u)
 
 do
 base="$(basename $file)"

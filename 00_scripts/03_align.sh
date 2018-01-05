@@ -12,7 +12,7 @@
 cd $PBS_O_WORKDIR
 
 #global variables
-INDEX="04_reference_walt/index_genome.trim.dbindex"
+INDEX="04_reference/index_genome.trim.dbindex"
 DATAFOLDER="03_trimmed"
 base=__BASE__
 
