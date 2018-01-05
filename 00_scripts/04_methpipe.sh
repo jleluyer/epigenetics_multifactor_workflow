@@ -13,7 +13,7 @@ cd $PBS_O_WORKDIR
 
 
 #global variables
-GENOME="04_reference_walt/GCF_002021735.1_Okis_V1_genomic.trim.fa"
+GENOME="04_reference/GCF_002021735.1_Okis_V1_genomic.trim.fa"
 DATA_FOLDER="05_results"
 base=__BASE__
 

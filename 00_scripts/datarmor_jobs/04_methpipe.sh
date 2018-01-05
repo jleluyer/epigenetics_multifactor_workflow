@@ -5,7 +5,7 @@
 rm METH*sh
 
 # Prepare jobs
-for file in $(ls 05_results|sed 's/.mr//g')
+for file in $(ls 05_results/*.mr|sed 's/.mr//g')
 
 do
 base="$(basename $file)"
