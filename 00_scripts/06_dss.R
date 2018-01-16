@@ -22,13 +22,13 @@ ntrans.1.s<-read.table("05_results/ntrans.1.s.dss",header=T)
 ntrans.1.t<-read.table("05_results/ntrans.1.t.dss",header=T)
 ntrans.2.s<-read.table("05_results/ntrans.2.s.dss",header=T)
 ntrans.2.t<-read.table("05_results/ntrans.2.t.dss",header=T)
-trans1.s<-read.table("05_results/trans1.s.dss",header=T)
-trans1.t<-read.table("05_results/trans1.t.dss",header=T)
-trans2.s<-read.table("05_results/trans2.s.dss",header=T)
-trans2.t<-read.table("05_results/trans2.t.dss",header=T)
+trans.1.s<-read.table("05_results/trans1.s.dss",header=T)
+trans.1.t<-read.table("05_results/trans1.t.dss",header=T)
+trans.2.s<-read.table("05_results/trans2.s.dss",header=T)
+trans.2.t<-read.table("05_results/trans2.t.dss",header=T)
 
 #Make object DSS
-BSobj <- makeBSseqData( list(ntrans.1.s, ntrans.2.s,ntrans.1.t,ntrans.2.t,trans1.s,trans2.s,trans1.t,trans2.t),c("NTS1","NTS2", "NTT1", "NTT2","TS1","TS2","TT1","TT2"))
+BSobj <- makeBSseqData( list(ntrans.1.s, ntrans.2.s,ntrans.1.t,ntrans.2.t,trans.1.s,trans.2.s,trans.1.t,trans.2.t),c("NTS1","NTS2", "NTT1", "NTT2","TS1","TS2","TT1","TT2"))
 save(BSobj,file="06_statistics/bsobj.dss.rda")
 message("object done")
 
