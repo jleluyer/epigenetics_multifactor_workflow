@@ -1,4 +1,4 @@
-# epigenetics_multifactor_workflow
+# Epigenetics_multifactor_workflow
 
 ## Warning
 
