@@ -54,8 +54,8 @@ trans.gff<-makeGRangesFromDataFrame(datagff,
 #find overlaps
 
 ### determine region with at least 3 CpG
-hitinter<-findOverlaps(trans.gff,dmrinteraction)
-hitinter.inter<-data.frame(trans.gff[queryHits(hitinter),], dmrinteraction[subjectHits(hitinter),])
+hitinter<-findOverlaps(trans.gff,dmrinter)
+hitinter.inter<-data.frame(trans.gff[queryHits(hitinter),], dmrinter[subjectHits(hitinter),])
 write.table(hitinter.inter,"06_statistics/overlap.interaction.txt",quote=F)
 
 hitinter<-findOverlaps(trans.gff,dmrenv)
