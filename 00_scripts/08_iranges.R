@@ -30,7 +30,7 @@ dmrenv<-makeGRangesFromDataFrame(dataenv,
                                         end.field="End",
                                         strand.field="Strand",
                                         starts.in.df.are.0based=FALSE)
-dmrtrain<-makeGRangesFromDataFrame(datastrain,
+dmrstrain<-makeGRangesFromDataFrame(datastrain,
                                         keep.extra.columns=TRUE,
                                         ignore.strand=TRUE,
                                         seqinfo=NULL,
