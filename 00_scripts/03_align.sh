@@ -7,7 +7,7 @@
 #PBS -q omp
 #PBS -r n
 
-. /appli/bioinfo/samtools/latest/env.sh
+# Import samtools
 
 cd $PBS_O_WORKDIR
 
