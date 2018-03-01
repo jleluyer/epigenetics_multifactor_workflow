@@ -2,7 +2,7 @@
 
 library(GenomicRanges)
 
-setwd("/home/jelel8/epic4_projects/transgenic/epigenetics/epigenetics_multifactor_workflow")
+setwd("epigenetics_multifactor_workflow")
 
 #load Data
 datainteraction <-read.table("06_statistics/dss.interaction.iranges",header=T,sep="\t")
