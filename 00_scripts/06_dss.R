@@ -15,7 +15,7 @@ ls()
 library(DSS)
 
 #set working directory
-setwd("/home1/datawork/jleluyer/01_projects/epigenetics_multifactor_workflow/")
+setwd("epigenetics_multifactor_workflow/")
 
 #Prepare dataset
 ntrans.1.s<-read.table("05_results/ntrans.1.s.dss",header=T)
