@@ -1,0 +1,1 @@
+chrBase chr base strand coverage freqC freqT

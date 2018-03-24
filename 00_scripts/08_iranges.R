@@ -2,21 +2,17 @@
 
 library(GenomicRanges)
 
-setwd("/home/jelel8/epic4_projects/transgenic/epigenetics/epigenetics_multifactor_workflow")
-
 
 #load Data
-datainteraction <-read.table("06_statistics/iranges/dss.interaction.iranges",header=T,sep="\t")
-dataenv <-read.table("06_statistics/iranges/dss.environment.iranges",header=T,sep="\t")
-datastrain <-read.table("06_statistics/iranges/dss.genotype.iranges",header=T,sep="\t")
+datainteraction <-read.table("06_statistics/dss.interaction.iranges",header=T,sep="\t")
+dataenv <-read.table("06_statistics/dss.env.iranges",header=T,sep="\t")
+datastrain <-read.table("06_statistics/dss.strain.iranges",header=T,sep="\t")
 datagff <-read.table("01_info_files/gff_file.iranges",header=T,sep="\t")
-dataDE <-read.table("01_info_files/gff_file_deinteraction.iranges",header=T,sep="\t")
 
-
-#Prepare formatted file
+#total dmr
 dmrinter<-makeGRangesFromDataFrame(datainteraction,
                                         keep.extra.columns=TRUE,
-                                        ignore.strand=TRUE,
+                                        ignore.strand=FALSE,
                                         seqinfo=NULL,
                                         seqnames.field="Chr",
                                         start.field="Start",
@@ -54,6 +50,7 @@ trans.gff<-makeGRangesFromDataFrame(datagff,
                                         starts.in.df.are.0based=FALSE)
 
 trans.gff.5kb<-makeGRangesFromDataFrame(datagff,
+dmrstrain<-makeGRangesFromDataFrame(datastrain,
                                         keep.extra.columns=TRUE,
                                         ignore.strand=FALSE,
                                         seqinfo=NULL,
@@ -67,6 +64,7 @@ start(trans.gff.5kb)<-start(trans.gff.5kb) - 5000
 end(trans.gff.5kb)<-end(trans.gff.5kb) + 5000
 
 trans.DE.inter.5kb<-makeGRangesFromDataFrame(dataDE,
+trans.gff<-makeGRangesFromDataFrame(datagff,
                                         keep.extra.columns=TRUE,
                                         ignore.strand=FALSE,
                                         seqinfo=NULL,
@@ -80,8 +78,6 @@ start(trans.DE.inter.5kb)<-start(trans.DE.inter.5kb) - 5000
 end(trans.DE.inter.5kb)<-end(trans.DE.inter.5kb) + 5000
 
 
-
-#find overlaps
 
 ### determine region with at least 3 CpG
 hitinter<-findOverlaps(trans.gff,dmrinter)
@@ -120,3 +116,12 @@ write.table(hitinter.checkenv,"06_statistics/iranges/overlap.checkenv.txt",quote
 hitinter<-findOverlaps(dmrstrain,dmrinter)
 hitinter.checkstrain<-data.frame(dmrstrain[queryHits(hitinter),], dmrinter[subjectHits(hitinter),])
 write.table(hitinter.checkstrain,"06_statistics/iranges/overlap.checkstrain.txt",quote=F)
+write.table(hitinter.inter,"06_statistics/overlap.interaction.txt",quote=F)
+
+hitinter<-findOverlaps(trans.gff,dmrenv)
+hitinter.env<-data.frame(trans.gff[queryHits(hitinter),], dmrenv[subjectHits(hitinter),])
+write.table(hitinter.env,"06_statistics/overlap.env.txt",quote=F)
+
+hitinter<-findOverlaps(trans.gff,dmrstrain)
+hitinter.strain<-data.frame(trans.gff[queryHits(hitinter),], dmrstrain[subjectHits(hitinter),])
+write.table(hitinter.strain,"06_statistics/overlap.strain.txt",quote=F)

@@ -15,7 +15,7 @@ ls()
 library(DSS)
 
 #set working directory
-setwd("/home/jelel8/epic4_projects/transgenic/epigenetics/epigenetics_multifactor_workflow/")
+setwd("epigenetics_multifactor_workflow/")
 
 #Prepare dataset
 trans.1.s<-read.table("05_results/HI.4381.005.Index_5.T-S_1.dss",header=T)
