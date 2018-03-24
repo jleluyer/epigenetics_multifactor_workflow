@@ -1,21 +1,26 @@
 #!/bin/bash
-#PBS -N walt.__BASE__
-#PBS -o 98_log_files/log-align.__BASE__.out
-#PBS -l walltime=20:00:00
-#PBS -l mem=30g
-#PBS -l ncpus=5
-#PBS -q omp
-#PBS -r n
+#SBATCH -D ./ 
+#SBATCH --job-name="align.__BASE__"
+#SBATCH -o 98_log_files/align.__BASE__.out
+#SBATCH -c 5
+#SBATCH -p ibismax
+#SBATCH -A ibismax
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=type_your_mail@ulaval.ca
+#SBATCH --time=20-00:00
+#SBATCH --mem=32000
 
-. /appli/bioinfo/samtools/latest/env.sh
-
-cd $PBS_O_WORKDIR
+cd $SLURM_SUBMIT_DIR
 
 #global variables
-INDEX="04_reference/index_genome.trim.dbindex"
+INDEX="04_reference/index_genome.dbindex"
 DATAFOLDER="03_trimmed"
 DATAOUTPUT="05_results"
 base=__BASE__
 
-walt -i $INDEX -m 6 -t 5 -N 5000000 -1 "$DATAFOLDER"/"$base"_R1.fq -2 "$DATAFOLDER"/"$base"_R2.fq -o "$DATAOUTPUT"/"$base".mr
+zcat "$DATAFOLDER"/"$base"_R1.fq.gz >"$DATAFOLDER"/"$base"_R1.fq
+zcat "$DATAFOLDER"/"$base"_R2.fq.gz >"$DATAFOLDER"/"$base"_R2.fq
 
+walt -i $INDEX -m 6 -t 5 -k 10 -N 5000000 -1 "$DATAFOLDER"/"$base"_R1.fq -2 "$DATAFOLDER"/"$base"_R2.fq -o "$DATAFOLDER"/"$base".mr
+
+rm "$DATAFOLDER"/"$base"_R*.fq

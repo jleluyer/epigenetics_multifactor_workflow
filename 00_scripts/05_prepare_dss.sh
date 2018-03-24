@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
-#PBS -N prep_dss.__BASE__
-#PBS -o 98_log_files/log-prep_dss.__BASE__.out
-#PBS -l walltime=20:00:00
-#PBS -l mem=5g
-#PBS -r n
+#SBATCH -D ./ 
+#SBATCH --job-name="prepdss.__BASE__"
+#SBATCH -o 98_log_files/log-prepdss.__BASE__.out
+#SBATCH -c 1
+#SBATCH -p ibismini
+#SBATCH -A ibismini
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=type_your_mail@ulaval.ca
+#SBATCH --time=20-00:00
+#SBATCH --mem=2000
 
-cd $PBS_O_WORKDIR
+cd $SLURM_SUBMIT_DIR
 
 # Global variables
 DATA_FOLDER="05_results"

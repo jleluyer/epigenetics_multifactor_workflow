@@ -1,0 +1,9 @@
+	environment	genotype
+NTS1	stream	wild
+NTS2	stream	wild
+NTT1	tank	wild
+NTT2	tank	wild
+TS1	stream	trans
+TS2	stream	trans
+TT1	tank	trans
+TT2	tank	trans

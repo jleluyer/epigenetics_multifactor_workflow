@@ -1,11 +1,18 @@
 #!/bin/bash
-#PBS -N filter_genome
-#PBS -o log-filter_genome.out
-#PBS -l walltime=20:00:00
-#PBS -l mem=50g
-#PBS -r n
+#SBATCH -D ./ 
+#SBATCH --job-name="filter"
+#SBATCH -o 98_log_files/filter.out
+#SBATCH -c 1
+#SBATCH -p ibismini
+#SBATCH -A ibismini
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=type_your_mail@ulaval.ca
+#SBATCH --time=20-00:00
+#SBATCH --mem=2000
 
-cd $PBS_O_WORKDIR
+cd $SLURM_SUBMIT_DIR
+
+module available bedtools/2.26.0
 
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
@@ -16,7 +23,7 @@ LOG_FOLDER="98_log_files"
 cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
 #global variables
-GENOME="04_reference/genome_filtered.fasta"
+GENOME="04_reference/genome.fa"
 
 GENOME_MASK="04_reference/genome_filtered.fa"
 
@@ -26,7 +33,7 @@ GENOME_MASK="04_reference/genome_filtered.fa"
 #MASK_CHR="-mc"         #Replace masking character.  That is, instead of masking
 #                       with Ns, use another charac
 
-FORMAT_INFO="01_info_files/list_snps.bed" #BED/GFF/VCF file of ranges to mask in -fi
+FORMAT_INFO="01_info_files/snp_db.bed" #BED/GFF/VCF file of ranges to mask in -fi
 
 
 

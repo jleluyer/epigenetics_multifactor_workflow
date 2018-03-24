@@ -1,2 +1,7 @@
 *.sh
 *.out
+*temp*
+05_results
+06_statistics
+07_average_meth
+.R*

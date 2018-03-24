@@ -15,22 +15,23 @@ ls()
 library(DSS)
 
 #set working directory
-setwd("/home1/datawork/jleluyer/01_projects/epigenetics_multifactor_workflow/")
+setwd("/home/jelel8/epic4_projects/transgenic/epigenetics/epigenetics_multifactor_workflow/")
 
 #Prepare dataset
-ntrans.1.s<-read.table("05_results/ntrans.1.s.dss",header=T)
-ntrans.1.t<-read.table("05_results/ntrans.1.t.dss",header=T)
-ntrans.2.s<-read.table("05_results/ntrans.2.s.dss",header=T)
-ntrans.2.t<-read.table("05_results/ntrans.2.t.dss",header=T)
-trans1.s<-read.table("05_results/trans1.s.dss",header=T)
-trans1.t<-read.table("05_results/trans1.t.dss",header=T)
-trans2.s<-read.table("05_results/trans2.s.dss",header=T)
-trans2.t<-read.table("05_results/trans2.t.dss",header=T)
+trans.1.s<-read.table("05_results/HI.4381.005.Index_5.T-S_1.dss",header=T)
+trans.1.t<-read.table("05_results/HI.4381.007.Index_7.T-T_1.dss",header=T)
+trans.2.s<-read.table("05_results/HI.4381.006.Index_6.T-S_2.dss",header=T)
+trans.2.t<-read.table("05_results/HI.4381.008.Index_8.T-T_2.dss",header=T)
+ntrans.1.s<-read.table("05_results/HI.4381.001.Index_1.NT-S_1.dss",header=T)
+ntrans.1.t<-read.table("05_results/HI.4381.003.Index_3.NT-T_1.dss",header=T)
+ntrans.2.s<-read.table("05_results/HI.4381.002.Index_2.NT-S_2.dss",header=T)
+ntrans.2.t<-read.table("05_results/HI.4381.004.Index_4.NT-T_2.dss",header=T)
 
 #Make object DSS
-BSobj <- makeBSseqData( list(ntrans.1.s, ntrans.2.s,ntrans.1.t,ntrans.2.t,trans1.s,trans2.s,trans1.t,trans2.t),c("NTS1","NTS2", "NTT1", "NTT2","TS1","TS2","TT1","TT2"))
+BSobj <- makeBSseqData( list(ntrans.1.s, ntrans.2.s,ntrans.1.t,ntrans.2.t,trans.1.s,trans.2.s,trans.1.t,trans.2.t),c("NTS1","NTS2", "NTT1", "NTT2","TS1","TS2","TT1","TT2"))
 save(BSobj,file="06_statistics/bsobj.dss.rda")
-message("object done")
+
+message("object completed")
 
 #Make design
 Strain = c(rep("NT",4),rep("T",4))
@@ -42,6 +43,8 @@ design
 DMLfit = DMLfit.multiFactor(BSobj, design=design, formula=~Strain+Env+Strain:Env)
 save(DMLfit,file="06_statistics/dmlfit.dss.rda")
 
+message("model w/ interaction completed")
+
 ### Strain
 # Testing
 DMLtest.strain = DMLtest.multiFactor(DMLfit, coef=2)
@@ -49,8 +52,11 @@ write.table(DMLtest.strain,file="06_statistics/dss.strain.testing.txt",quote=F)
 save(DMLtest.strain,file="06_statistics/dmltest.strain.dss.rda")
 
 #DMR for multiple factor
-DMRtest<-callDMR(DMLtest.strain, p.threshold=0.01, minlen=500, minCG=3, dis.merge=1000, pct.sig=0.5)
+DMRtest<-callDMR(DMLtest.strain, p.threshold=0.001, minlen=50, minCG=5, dis.merge=50, pct.sig=0.4)
 write.table(DMRtest,file="06_statistics/dss.strain.dmr.txt",quote=F)
+save(DMRtest,file="06_statistics/dmr.strain.dss.rda")
+
+message("Strain effect completed")
 
 ### Environment
 # Testing
@@ -59,8 +65,11 @@ write.table(DMLtest.env,file="06_statistics/dss.env.testing.txt",quote=F)
 save(DMLtest.env,file="06_statistics/dmltest.env.dss.rda")
 
 #DMR for multiple factor
-DMRtest<-callDMR(DMLtest.env, p.threshold=0.01, minlen=500, minCG=3, dis.merge=1000, pct.sig=0.5)
+DMRtest<-callDMR(DMLtest.env, p.threshold=0.001, minlen=50, minCG=5, dis.merge=50, pct.sig=0.4)
 write.table(DMRtest,file="06_statistics/dss.env.dmr.txt",quote=F)
+save(DMRtest,file="06_statistics/dmr.env.dss.rda")
+
+message("Environment effect completed")
 
 ### Interaction
 # Testing
@@ -69,5 +78,9 @@ write.table(DMLtest.interaction,file="06_statistics/dss.interaction.testing.txt"
 save(DMLtest.interaction,file="06_statistics/dmltest.interaction.dss.rda")
 
 #DMR for multiple factor
-DMRtest<-callDMR(DMLtest.interaction, p.threshold=0.01, minlen=500, minCG=3, dis.merge=1000, pct.sig=0.5)
+DMRtest<-callDMR(DMLtest.interaction, p.threshold=0.001, minlen=50, minCG=5, dis.merge=50, pct.sig=0.4)
 write.table(DMRtest,file="06_statistics/dss.interaction.dmr.txt",quote=F)
+save(DMRtest,file="06_statistics/dmr.interaction.dss.rda")
+
+message("Interaction effect completed")
+message("Data saved .rda for DMR visualization")

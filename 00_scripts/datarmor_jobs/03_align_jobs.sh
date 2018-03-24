@@ -5,7 +5,7 @@
 rm ALIGN*sh
 
 # Prepare jobs
-for file in $(ls 03_trimmed/*fq|sed -e 's/_R[12].fq//g'|sort -u)
+for file in $(ls 03_trimmed/*fq.gz|sed -e 's/_R[12].fq.gz//g'|sort -u)
 
 do
 base="$(basename $file)"
@@ -17,5 +17,5 @@ done
 # Submit jobs
 for i in $(ls ALIGN*sh)
 do
-    qsub $i
+    sbatch $i
 done

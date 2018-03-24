@@ -17,5 +17,5 @@ done
 # Submit jobs
 for i in $(ls PREPDSS*sh)
 do
-    qsub $i
+    sbatch $i
 done

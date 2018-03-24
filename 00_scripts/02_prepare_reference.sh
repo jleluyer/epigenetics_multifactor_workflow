@@ -1,11 +1,16 @@
 #!/bin/bash
-#PBS -N index.trim
-#PBS -o 98_log_files/log-index.trim.out
-#PBS -l walltime=20:00:00
-#PBS -l mem=50g
-#PBS -r n
+#SBATCH -D ./ 
+#SBATCH --job-name="index"
+#SBATCH -o 98_log_files/index.out
+#SBATCH -c 1
+#SBATCH -p ibismini
+#SBATCH -A ibismini
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=type_your_mail@ulaval.ca
+#SBATCH --time=20-00:00
+#SBATCH --mem=20000
 
-cd $PBS_O_WORKDIR
+cd $SLURM_SUBMIT_DIR
 
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
 
@@ -21,7 +26,7 @@ makedb -c <genome folder or file> -o <index file>
 '
 
 #variables
-GENOME="04_reference/genome.fa"           #use genome_filtered.fa if removing C-T SNPs from the reference genome 
+GENOME="04_reference/genome_filtered.fa"           #use genome_filtered.fa if removing C-T SNPs from the reference genome 
                                           #("00_scripts/utility_scripts/05_prepare_reference_filter.sh
 INDEX="04_reference/index_genome.dbindex"
 
